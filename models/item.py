@@ -5,7 +5,6 @@ class ItemModel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    description = db.Column(db.String(500))
     price = db.Column(db.Float(precision=2))
     
     store_id = db.Column(db.Integer, db.ForeignKey('stores.id'))
@@ -13,12 +12,11 @@ class ItemModel(db.Model):
     
     def __init__(self, name, description, price, store_id) -> None:
         self.name = name
-        self.description = description
         self.price = price
         self.store_id = store_id
         
     def json(self):
-        return {"name": self.name, "price": self.price, "description": self.description}
+        return {"name": self.name, "price": self.price}
     
     @classmethod
     def find_by_name(cls, name):
